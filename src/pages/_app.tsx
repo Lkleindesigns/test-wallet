@@ -1,7 +1,8 @@
 import "@/styles/globals.css";
-import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi/react";
+import { createWeb3Modal } from "@web3modal/wagmi/react";
+import { defaultWagmiConfig } from '@web3modal/wagmi/react/config'
 
-import { WagmiConfig } from "wagmi";
+import { WagmiProvider } from "wagmi";
 import type { AppProps } from "next/app";
 import { useEffect, useState } from "react";
 import {
@@ -52,9 +53,9 @@ export default function App({ Component, pageProps }: AppProps) {
 	return (
 		<>
 			{ready ? (
-				<WagmiConfig config={wagmiConfig}>
+				<WagmiProvider config={wagmiConfig}>
 					<Component {...pageProps} />
-				</WagmiConfig>
+				</WagmiProvider>
 			) : null}
 		</>
 	);
