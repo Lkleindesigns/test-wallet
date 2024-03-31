@@ -2,31 +2,17 @@ import "@/styles/globals.css";
 import { createWeb3Modal } from "@web3modal/wagmi/react";
 import { defaultWagmiConfig } from '@web3modal/wagmi/react/config'
 
-import { WagmiProvider } from "wagmi";
+import { WagmiProvider, cookieStorage, createStorage } from "wagmi";
 import type { AppProps } from "next/app";
 import { useEffect, useState } from "react";
 
 import {
-	arbitrum,
-	avalanche,
-	bsc,
-	fantom,
-	gnosis,
 	mainnet,
-	optimism,
-	polygon,
 } from "wagmi/chains";
 
 const chains = [
 	mainnet,
-	polygon,
-	avalanche,
-	arbitrum,
-	bsc,
-	optimism,
-	gnosis,
-	fantom,
-] as const;
+] 
 
 // 1. Get projectID at https://cloud.walletconnect.com
 
@@ -39,9 +25,17 @@ const metadata = {
 	icons: ["https://avatars.githubusercontent.com/u/37784886"],
 };
 
-const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata });
+const wagmiConfig = defaultWagmiConfig({
+  chains,
+  projectId,
+  metadata,
+  ssr: true,
+  storage: createStorage({
+    storage: cookieStorage
+  })
+})
 
-createWeb3Modal({ wagmiConfig, projectId, chains });
+createWeb3Modal({ wagmiConfig, projectId });
 
 export default function App({ Component, pageProps }: AppProps) {
 	const [ready, setReady] = useState(false);
