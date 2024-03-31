@@ -5,6 +5,8 @@ import { defaultWagmiConfig } from '@web3modal/wagmi/react/config'
 import { WagmiProvider, cookieStorage, createStorage } from "wagmi";
 import type { AppProps } from "next/app";
 import { useEffect, useState } from "react";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+const queryClient = new QueryClient()
 
 import {
 	mainnet,
@@ -47,7 +49,9 @@ export default function App({ Component, pageProps }: AppProps) {
 		<>
 			{ready ? (
 				<WagmiProvider config={wagmiConfig}>
+					  <QueryClientProvider client={queryClient}>
 					<Component {...pageProps} />
+					</QueryClientProvider>
 				</WagmiProvider>
 			) : null}
 		</>
