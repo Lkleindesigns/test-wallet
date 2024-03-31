@@ -13,6 +13,7 @@ import {
 	mainnet,
 	optimism,
 	polygon,
+	base
 } from "wagmi/chains";
 
 const chains = [
@@ -24,6 +25,7 @@ const chains = [
 	optimism,
 	gnosis,
 	fantom,
+	base
 ];
 
 // 1. Get projectID at https://cloud.walletconnect.com
