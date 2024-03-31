@@ -5,6 +5,7 @@ import { defaultWagmiConfig } from '@web3modal/wagmi/react/config'
 import { WagmiProvider } from "wagmi";
 import type { AppProps } from "next/app";
 import { useEffect, useState } from "react";
+
 import {
 	arbitrum,
 	avalanche,
@@ -14,7 +15,6 @@ import {
 	mainnet,
 	optimism,
 	polygon,
-	base
 } from "wagmi/chains";
 
 const chains = [
@@ -26,8 +26,7 @@ const chains = [
 	optimism,
 	gnosis,
 	fantom,
-	base
-];
+] as const;
 
 // 1. Get projectID at https://cloud.walletconnect.com
 
