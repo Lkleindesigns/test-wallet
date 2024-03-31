@@ -26,7 +26,6 @@ const metadata = {
 };
 
 const wagmiConfig = defaultWagmiConfig({
-	defaultChain: mainnet,
 	chains,
   projectId,
   metadata,
