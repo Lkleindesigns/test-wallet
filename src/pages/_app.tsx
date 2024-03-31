@@ -9,12 +9,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 const queryClient = new QueryClient()
 
 import {
-	mainnet,
+	mainnet, sepolia
 } from "wagmi/chains";
 
-const chains = [
-	mainnet,
-] 
+const chains = [mainnet, sepolia] as const
 
 // 1. Get projectID at https://cloud.walletconnect.com
 
@@ -28,7 +26,8 @@ const metadata = {
 };
 
 const wagmiConfig = defaultWagmiConfig({
-  chains,
+	defaultChain: mainnet,
+	chains,
   projectId,
   metadata,
   ssr: true,
@@ -37,7 +36,7 @@ const wagmiConfig = defaultWagmiConfig({
   })
 })
 
-createWeb3Modal({ wagmiConfig, projectId });
+createWeb3Modal({ wagmiConfig, projectId, chains });
 
 export default function App({ Component, pageProps }: AppProps) {
 	const [ready, setReady] = useState(false);
